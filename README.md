@@ -41,3 +41,12 @@ The arguments mean the following:
 - `-c` is the client class name
 - `-n` is the namespace
 - `-d` is the OpenApi document URL
+
+
+Sometimes, the OpenApi documents will be updated. There is a `kiota-lock.json` which keeps a reference
+to the remote OpenApi document.
+
+Update SDK Client
+```
+dotnet kiota update -o src/WebApiOne.Client/Sdk
+```

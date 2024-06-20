@@ -1,0 +1,33 @@
+{
+  "descriptionHash": "23A6EA113AF74A8BE4DBC8736EA0CFF3E5C65D9EAF37AD9DB2A5D969DA7C966046C615F8E3F38FA454664927A66F2DD92104808D97A18FB09171DDDD84C8FBBA",
+  "descriptionLocation": "https://diegosasw.github.io/sample-open-api/web-api-one.json",
+  "lockFileVersion": "1.0.0",
+  "kiotaVersion": "1.15.0",
+  "clientClassName": "WebApiOneClient",
+  "clientNamespaceName": "WebApiOne.Client.Sdk",
+  "language": "CSharp",
+  "usesBackingStore": false,
+  "excludeBackwardCompatible": false,
+  "includeAdditionalData": true,
+  "disableSSLValidation": false,
+  "serializers": [
+    "Microsoft.Kiota.Serialization.Json.JsonSerializationWriterFactory",
+    "Microsoft.Kiota.Serialization.Text.TextSerializationWriterFactory",
+    "Microsoft.Kiota.Serialization.Form.FormSerializationWriterFactory",
+    "Microsoft.Kiota.Serialization.Multipart.MultipartSerializationWriterFactory"
+  ],
+  "deserializers": [
+    "Microsoft.Kiota.Serialization.Json.JsonParseNodeFactory",
+    "Microsoft.Kiota.Serialization.Text.TextParseNodeFactory",
+    "Microsoft.Kiota.Serialization.Form.FormParseNodeFactory"
+  ],
+  "structuredMimeTypes": [
+    "application/json",
+    "text/plain;q=0.9",
+    "application/x-www-form-urlencoded;q=0.2",
+    "multipart/form-data;q=0.1"
+  ],
+  "includePatterns": [],
+  "excludePatterns": [],
+  "disabledValidationRules": []
+}
