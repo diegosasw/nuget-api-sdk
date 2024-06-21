@@ -1,0 +1,9 @@
+<Project>
+	<PropertyGroup Label="Common">
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>Enable</ImplicitUsings>
+		<Nullable>Enable</Nullable>
+		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+		<RestorePackagesWithLockFile>True</RestorePackagesWithLockFile>
+	</PropertyGroup>
+</Project>

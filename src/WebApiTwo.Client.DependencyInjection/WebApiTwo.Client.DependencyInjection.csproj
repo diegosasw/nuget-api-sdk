@@ -9,7 +9,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ApiSdk.Common\ApiSdk.Common.csproj" />
+        <ProjectReference Include="..\ApiSdk.Common.DependencyInjection\ApiSdk.Common.DependencyInjection.csproj" />
+        <ProjectReference Include="..\WebApiTwo.Client\WebApiTwo.Client.csproj" />
     </ItemGroup>
 
 </Project>

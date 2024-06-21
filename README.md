@@ -29,10 +29,16 @@ Compile the solution
 dotnet build
 ```
 
-Generate SDK Client
+Generate SDK Client for Web Api One into the `WebApiOne.Client` project
 ```
 dotnet kiota generate -l CSharp -o src/WebApiOne.Client/Sdk -c WebApiOneClient -n WebApiOne.Client.Sdk  -d https://die
 gosasw.github.io/sample-open-api/web-api-one.json
+```
+
+Generate SDK Client for Web Api Two into the `WebApiTwo.Client` project
+```
+dotnet kiota generate -l CSharp -o src/WebApiTwo.Client/Sdk -c WebApiTwoClient -n WebApiTwo.Client.Sdk  -d https://die
+gosasw.github.io/sample-open-api/web-api-two.json
 ```
 
 The arguments mean the following:
@@ -46,7 +52,12 @@ The arguments mean the following:
 Sometimes, the OpenApi documents will be updated. There is a `kiota-lock.json` which keeps a reference
 to the remote OpenApi document.
 
-Update SDK Client
+Update SDK Client for Web Api One
 ```
 dotnet kiota update -o src/WebApiOne.Client/Sdk
+```
+
+Update SDK Client for Web Api Two
+```
+dotnet kiota update -o src/WebApiTwo.Client/Sdk
 ```
