@@ -1,3 +1,5 @@
+using ApiSdk.Common;
+using ApiSdk.Common.DependencyInjection;
 using ApiSdk.Common.Options;
 using WebApiOne.Client.DependencyInjection.Kiota;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,13 +10,16 @@ namespace WebApiOne.Client.DependencyInjection;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddSdkClient(
+    public static IServiceCollection AddWebApiOneClient(
         this IServiceCollection services,
         string configurationSectionName = "Sdk")
     {
         ArgumentNullException.ThrowIfNull(services);
         ArgumentException.ThrowIfNullOrWhiteSpace(configurationSectionName);
 
+        services.AddKiotaHandlers();
+        services.AddMemoryCache();
+        
         services
             .AddOptions<SdkOptions>()
             .BindConfiguration(configurationSectionName)
@@ -26,8 +31,7 @@ public static class ServiceCollectionExtensions
             {
                 var options = sp.GetRequiredService<IOptions<SdkOptions>>().Value;
                 client.BaseAddress = new Uri(options.BaseUrl);
-            })
-            .AddKiotaHandlers();
+            });
 
         services.AddHttpClient<SdkTokenProvider>();
         

@@ -294,10 +294,17 @@
           "Microsoft.Extensions.Options.DataAnnotations": "[8.0.0, )"
         }
       },
-      "webapitwo.client": {
+      "webapione.client": {
         "type": "Project",
         "dependencies": {
           "ApiSdk.Common": "[1.0.0, )"
+        }
+      },
+      "webapione.client.dependencyinjection": {
+        "type": "Project",
+        "dependencies": {
+          "ApiSdk.Common.DependencyInjection": "[1.0.0, )",
+          "WebApiOne.Client": "[1.0.0, )"
         }
       }
     }

@@ -2,14 +2,14 @@ using Microsoft.Kiota.Abstractions;
 using Microsoft.Kiota.Abstractions.Authentication;
 using Microsoft.Kiota.Http.HttpClientLibrary;
 
-namespace WebApiOne.Client.DependencyInjection;
+namespace ApiSdk.Common.DependencyInjection;
 
 public class SdkFactory
 {
     private readonly HttpClient _httpClient;
-    private readonly IAccessTokenProvider _authProvider;
+    private readonly SdkTokenProvider _authProvider;
 
-    public SdkFactory(HttpClient httpClient, IAccessTokenProvider authProvider)
+    public SdkFactory(HttpClient httpClient, SdkTokenProvider authProvider)
     {
         _httpClient = httpClient;
         _authProvider = authProvider;

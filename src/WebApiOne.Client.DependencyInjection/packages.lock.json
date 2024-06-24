@@ -287,6 +287,7 @@
       "apisdk.common.dependencyinjection": {
         "type": "Project",
         "dependencies": {
+          "ApiSdk.Common": "[1.0.0, )",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "[8.0.1, )",
           "Microsoft.Extensions.Http": "[8.0.0, )",
           "Microsoft.Extensions.Options.ConfigurationExtensions": "[8.0.0, )",

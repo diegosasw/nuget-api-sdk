@@ -15,4 +15,8 @@
         <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="8.0.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\ApiSdk.Common\ApiSdk.Common.csproj" />
+    </ItemGroup>
+
 </Project>

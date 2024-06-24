@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiTwo.Client.Dependency
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiSdk.Common.DependencyInjection", "src\ApiSdk.Common.DependencyInjection\ApiSdk.Common.DependencyInjection.csproj", "{83D5A6D6-BAB0-455A-9BEA-3D274AD140F6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiSdk.Sample.WebApi", "sample\ApiSdk.Sample.WebApi\ApiSdk.Sample.WebApi.csproj", "{9FCBA33B-C5E8-411A-A96D-47CA61E6E393}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,7 @@ Global
 		{E4339BDA-C397-4F69-8271-9E19EF81F565} = {5E71424E-1981-45BE-A169-47A5D650069E}
 		{31F3EC65-DAC9-4A1A-BE79-9B6FADC2680C} = {5E71424E-1981-45BE-A169-47A5D650069E}
 		{83D5A6D6-BAB0-455A-9BEA-3D274AD140F6} = {5E71424E-1981-45BE-A169-47A5D650069E}
+		{9FCBA33B-C5E8-411A-A96D-47CA61E6E393} = {7DEDB084-577A-4223-9A77-1F8FFDF356A5}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{0997ADB0-B286-4F60-BB20-E8B0CE8C4772}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -69,5 +72,9 @@ Global
 		{83D5A6D6-BAB0-455A-9BEA-3D274AD140F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83D5A6D6-BAB0-455A-9BEA-3D274AD140F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83D5A6D6-BAB0-455A-9BEA-3D274AD140F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FCBA33B-C5E8-411A-A96D-47CA61E6E393}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FCBA33B-C5E8-411A-A96D-47CA61E6E393}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FCBA33B-C5E8-411A-A96D-47CA61E6E393}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FCBA33B-C5E8-411A-A96D-47CA61E6E393}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
