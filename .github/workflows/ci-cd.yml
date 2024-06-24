@@ -45,8 +45,12 @@ jobs:
       - name: Build the project
         run: dotnet build -c Release --no-restore
 
-      - name: Pack
-        run: dotnet pack *.sln -c Release -p:Version=${{ env.version }} --output nuget --include-symbols
+      - name: Pack Nuget
+        run: dotnet pack *.sln -c Release -p:Version=${{ env.version }} --output ${{ github.workspace }}/nuget --include-symbols
 
-      - name: List
-        run: ls nuget
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nuget
+          if-no-files-found: error
+          retention-days: 7
+          path: ${{ github.workspace }}/nuget/*.nupkg

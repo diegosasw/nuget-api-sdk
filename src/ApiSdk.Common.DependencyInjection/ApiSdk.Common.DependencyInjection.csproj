@@ -6,6 +6,8 @@
         <ImplicitUsings>$(ImplicitUsings)</ImplicitUsings>
         <TreatWarningsAsErrors>$(TreatWarningsAsErrors)</TreatWarningsAsErrors>
         <RestorePackagesWithLockFile>$(RestorePackagesWithLockFile)</RestorePackagesWithLockFile>
+        <IsPackable>true</IsPackable>
+        <IsPublishable>true</IsPublishable>
     </PropertyGroup>
 
     <ItemGroup>

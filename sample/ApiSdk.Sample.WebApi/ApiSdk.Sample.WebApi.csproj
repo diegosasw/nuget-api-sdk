@@ -5,6 +5,8 @@
         <Nullable>$(Nullable)</Nullable>
         <ImplicitUsings>$(ImplicitUsings)</ImplicitUsings>
         <TreatWarningsAsErrors>$(TreatWarningsAsErrors)</TreatWarningsAsErrors>
+        <IsPackable>false</IsPackable>
+        <IsPublishable>false</IsPublishable>
     </PropertyGroup>
 
     <ItemGroup>
