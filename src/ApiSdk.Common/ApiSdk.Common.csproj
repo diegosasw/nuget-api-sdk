@@ -19,8 +19,4 @@
       <PackageReference Include="Microsoft.Kiota.Serialization.Text" Version="1.2.2" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="DependencyInjection\" />
-    </ItemGroup>
-
 </Project>

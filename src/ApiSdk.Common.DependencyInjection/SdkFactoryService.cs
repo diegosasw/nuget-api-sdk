@@ -1,14 +1,18 @@
+using ApiSdk.Common.Factories;
+using ApiSdk.Common.Options;
 using Microsoft.Kiota.Abstractions;
 using Microsoft.Kiota.Http.HttpClientLibrary;
+// ReSharper disable ConvertToPrimaryConstructor
 
 namespace ApiSdk.Common.DependencyInjection;
 
-public class SdkFactory
+public class SdkFactoryService<TOptions>
+    where TOptions : BaseSdkAuthenticationOptions
 {
     private readonly HttpClient _httpClient;
-    private readonly SdkAccessTokenProvider _authProvider;
+    private readonly SdkAccessTokenProvider<TOptions> _authProvider;
 
-    public SdkFactory(HttpClient httpClient, SdkAccessTokenProvider authProvider)
+    public SdkFactoryService(HttpClient httpClient, SdkAccessTokenProvider<TOptions> authProvider)
     {
         _httpClient = httpClient;
         _authProvider = authProvider;
@@ -16,7 +20,6 @@ public class SdkFactory
     
     /// <summary>
     /// Creates a new instance of <see cref="TClient"/>, used as a factory for the client.
-    /// It uses reflection and expects the api client to accept a <see cref="HttpClientRequestAdapter"/> in the constructor.
     /// </summary>
     /// <returns>an instance of <see cref="TClient"/></returns>
     public TClient Create<TClient>()
@@ -24,7 +27,7 @@ public class SdkFactory
     {
         var httpClientRequestAdapter = 
             new HttpClientRequestAdapter(new SdkAuthenticationProvider(_authProvider), httpClient: _httpClient);
-        
-        return (TClient)Activator.CreateInstance(typeof(TClient), httpClientRequestAdapter)!;
+
+        return ApiClientFactory.Create<TClient>(httpClientRequestAdapter);
     }
 }

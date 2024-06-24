@@ -1,5 +1,6 @@
 using Microsoft.Kiota.Abstractions;
 using Microsoft.Kiota.Abstractions.Authentication;
+// ReSharper disable ConvertToPrimaryConstructor
 
 namespace ApiSdk.Common;
 

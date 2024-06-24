@@ -1,9 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Kiota.Http.HttpClientLibrary.Middleware;
 using Microsoft.Kiota.Http.HttpClientLibrary.Middleware.Options;
+
 // ReSharper disable UnusedMember.Global
 
-namespace WebApiOne.Client.DependencyInjection.Kiota;
+namespace ApiSdk.Common.DependencyInjection;
 
 /// <summary>
 /// Service collection extensions for Kiota handlers.
@@ -18,12 +20,12 @@ public static class KiotaServiceCollectionExtensions
     /// <remarks>The handlers are added to the http client by the <see cref="AddKiotaHandlers(IHttpClientBuilder)"/> call, which requires them to be pre-registered in DI</remarks>
     public static IServiceCollection AddKiotaHandlers(this IServiceCollection services)
     {
-        services.AddTransient<UriReplacementHandler<UriReplacementHandlerOption>>();
-        services.AddTransient<RetryHandler>();
-        services.AddTransient<RedirectHandler>();
-        services.AddTransient<ParametersNameDecodingHandler>();
-        services.AddTransient<UserAgentHandler>();
-        services.AddTransient<HeadersInspectionHandler>();
+        services.TryAddTransient<UriReplacementHandler<UriReplacementHandlerOption>>();
+        services.TryAddTransient<RetryHandler>();
+        services.TryAddTransient<RedirectHandler>();
+        services.TryAddTransient<ParametersNameDecodingHandler>();
+        services.TryAddTransient<UserAgentHandler>();
+        services.TryAddTransient<HeadersInspectionHandler>();
         return services;
     }
 

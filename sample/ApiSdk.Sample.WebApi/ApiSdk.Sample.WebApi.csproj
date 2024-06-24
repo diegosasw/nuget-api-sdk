@@ -5,7 +5,6 @@
         <Nullable>$(Nullable)</Nullable>
         <ImplicitUsings>$(ImplicitUsings)</ImplicitUsings>
         <TreatWarningsAsErrors>$(TreatWarningsAsErrors)</TreatWarningsAsErrors>
-        <RestorePackagesWithLockFile>$(RestorePackagesWithLockFile)</RestorePackagesWithLockFile>
     </PropertyGroup>
 
     <ItemGroup>

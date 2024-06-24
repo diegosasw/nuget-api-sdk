@@ -6,19 +6,21 @@ using Microsoft.Kiota.Abstractions.Authentication;
 
 namespace ApiSdk.Common;
 
-public class SdkAccessTokenProvider
+public class SdkAccessTokenProvider<TOptions>
     : IAccessTokenProvider
+    where TOptions : BaseSdkAuthenticationOptions
 {
-    private readonly SdkOptions _sdkOptions;
+    private readonly BaseSdkAuthenticationOptions _sdkAuthenticationOptions;
     private readonly HttpClient _httpClient;
     private readonly IMemoryCache? _memoryCache;
 
+    // ReSharper disable once ConvertToPrimaryConstructor
     public SdkAccessTokenProvider(
-        IOptions<SdkOptions> sdkOptions,
+        IOptions<TOptions> sdkAuthenticationOptions,
         HttpClient httpClient,
         IMemoryCache? memoryCache)
     {
-        _sdkOptions = sdkOptions.Value;
+        _sdkAuthenticationOptions = sdkAuthenticationOptions.Value;
         _httpClient = httpClient;
         _memoryCache = memoryCache;
     }
@@ -34,23 +36,29 @@ public class SdkAccessTokenProvider
             throw new InvalidOperationException($"The provided Url {uri} is not allowed");
         }
 
-        return GetAccessTokenAsync(cancellationToken);
+        return GetAccessTokenAsync(
+            _sdkAuthenticationOptions.TokenEndpointUrl,
+            _sdkAuthenticationOptions.ClientId,
+            _sdkAuthenticationOptions.Secret,
+            _sdkAuthenticationOptions.TokenCacheKey,
+            cancellationToken);
     }
 
     /// <inheritdoc/>
-    public AllowedHostsValidator AllowedHostsValidator => new(["vitesse.free.beeceptor.com"]);
+    public AllowedHostsValidator AllowedHostsValidator => new([]);
     
-    private async Task<string> GetAccessTokenAsync(CancellationToken cancellationToken)
+    private async Task<string> GetAccessTokenAsync(
+        string tokenEndpointUrl,
+        string clientId, 
+        string secret, 
+        string tokenCacheKey,
+        CancellationToken cancellationToken)
     {
-        const string cacheKey = "SdkAccessToken";
-        if (_memoryCache?.TryGetValue(cacheKey, out string? token) == true)
+        var isCacheEnabled = _memoryCache is not null && !string.IsNullOrWhiteSpace(tokenCacheKey);
+        if (isCacheEnabled && _memoryCache?.TryGetValue(tokenCacheKey, out string? token) == true)
         {
             return token!;
         }
-
-        var tokenEndpointUrl = _sdkOptions.TokenEndpointUrl;
-        var clientId = _sdkOptions.ClientId;
-        var secret = _sdkOptions.Secret;
         
         var request = new HttpRequestMessage(HttpMethod.Post, tokenEndpointUrl);
         //request.Headers.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.UTF8.GetBytes($"{clientId}:{secret}")));
@@ -66,7 +74,10 @@ public class SdkAccessTokenProvider
         try
         {
             var tokenResponse = await response.Content.ReadFromJsonAsync<AccessTokenResult>(cancellationToken);
-            _memoryCache?.Set(cacheKey, tokenResponse!.AccessToken, TimeSpan.FromSeconds(tokenResponse.ExpiresIn - 300));
+            if (isCacheEnabled)
+            {
+                _memoryCache?.Set(tokenCacheKey, tokenResponse!.AccessToken, TimeSpan.FromSeconds(tokenResponse.ExpiresIn - 300));
+            }
             return tokenResponse!.AccessToken;
         }
         catch (Exception exception)
