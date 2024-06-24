@@ -10,6 +10,8 @@ on:
 
 permissions:
   contents: write
+  actions: write
+  packages: write
 
 jobs:
   build-and-deploy:
@@ -58,4 +60,4 @@ jobs:
       - name: Publish NuGet package
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: dotnet nuget push ${{ github.workspace }}/nuget/*.nupkg -k ${GITHUB_TOKEN} -s https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --skip-duplicate --no-symbols
+        run: dotnet nuget push ${{ github.workspace }}/nuget/*.nupkg -k ${GITHUB_TOKEN} -s https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --skip-duplicate
