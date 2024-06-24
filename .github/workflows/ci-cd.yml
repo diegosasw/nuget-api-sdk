@@ -1,0 +1,48 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    concurrency: ci-${{ github.ref }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Install dependencies
+        run: dotnet restore
+
+      - name: Install local tools
+        run: dotnet tool restore
+
+      - name: Calculate semantic version
+        id: set_semver
+        run: |
+          SEMVER=$(dotnet gitversion -showvariable semver)
+          echo "version=$SEMVER" >> $GITHUB_ENV 
+        # to be used with ${{ env.version }}
+
+      - name: Build the project
+        run: dotnet build -c Release --no-restore
+
+      - name: Pack
+        run: dotnet pack *.sln -c Release -p:Version=${{ env.version }} --output nuget --include-symbols
+
+      - name: List
+        run: ls nuget

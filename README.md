@@ -61,3 +61,10 @@ Update SDK Client for Web Api Two
 ```
 dotnet kiota update -o src/WebApiTwo.Client/Sdk
 ```
+
+## Approach to automate SDK generation
+
+The preferred approach for SDK automation is to release a new version every time the OpenAPI files change.
+
+## Versioning
+It uses dotnet tool `gitversion.tool` locally
