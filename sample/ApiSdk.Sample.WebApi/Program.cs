@@ -5,7 +5,7 @@ using WebApiOne.Client.Sdk.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Register SDK in DI Container
-builder.Services.AddWebApiOneClient("SdkWebApiOneSample");
+builder.Services.AddWebApiOneClient("SdkWebApiOneSampleWebApi");
 
 var app = builder.Build();
 

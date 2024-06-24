@@ -1,5 +1,4 @@
 using Microsoft.Kiota.Abstractions;
-using Microsoft.Kiota.Abstractions.Authentication;
 using Microsoft.Kiota.Http.HttpClientLibrary;
 
 namespace ApiSdk.Common.DependencyInjection;
@@ -7,9 +6,9 @@ namespace ApiSdk.Common.DependencyInjection;
 public class SdkFactory
 {
     private readonly HttpClient _httpClient;
-    private readonly SdkTokenProvider _authProvider;
+    private readonly SdkAccessTokenProvider _authProvider;
 
-    public SdkFactory(HttpClient httpClient, SdkTokenProvider authProvider)
+    public SdkFactory(HttpClient httpClient, SdkAccessTokenProvider authProvider)
     {
         _httpClient = httpClient;
         _authProvider = authProvider;
@@ -24,7 +23,7 @@ public class SdkFactory
         where TClient : BaseRequestBuilder
     {
         var httpClientRequestAdapter = 
-            new HttpClientRequestAdapter(new BaseBearerTokenAuthenticationProvider(_authProvider), httpClient: _httpClient);
+            new HttpClientRequestAdapter(new SdkAuthenticationProvider(_authProvider), httpClient: _httpClient);
         
         return (TClient)Activator.CreateInstance(typeof(TClient), httpClientRequestAdapter)!;
     }

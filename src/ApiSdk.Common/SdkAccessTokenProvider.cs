@@ -6,14 +6,14 @@ using Microsoft.Kiota.Abstractions.Authentication;
 
 namespace ApiSdk.Common;
 
-public class SdkTokenProvider
+public class SdkAccessTokenProvider
     : IAccessTokenProvider
 {
     private readonly SdkOptions _sdkOptions;
     private readonly HttpClient _httpClient;
     private readonly IMemoryCache? _memoryCache;
 
-    public SdkTokenProvider(
+    public SdkAccessTokenProvider(
         IOptions<SdkOptions> sdkOptions,
         HttpClient httpClient,
         IMemoryCache? memoryCache)

@@ -33,7 +33,7 @@ public static class ServiceCollectionExtensions
                 client.BaseAddress = new Uri(options.BaseUrl);
             });
 
-        services.AddHttpClient<SdkTokenProvider>();
+        services.AddHttpClient<SdkAccessTokenProvider>();
         
         services.AddTransient<WebApiOneClient>(sp =>
         {
