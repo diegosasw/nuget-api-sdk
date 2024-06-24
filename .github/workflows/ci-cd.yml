@@ -56,4 +56,4 @@ jobs:
           path: ${{ github.workspace }}/nuget/*.nupkg
 
       - name: Publish NuGet package
-        run: dotnet nuget push ${{ github.workspace }}/nuget/*.nupkg --api-key "${{ secrets.nuget-password }}" --source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --skip-duplicate
+        run: dotnet nuget push ${{ github.workspace }}/nuget/*.nupkg --api-key "${{ secrets.GITHUB_TOKEN }}" --source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --skip-duplicate
