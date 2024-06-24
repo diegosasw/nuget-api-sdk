@@ -35,8 +35,7 @@ jobs:
         id: set_semver
         run: |
           SEMVER=$(dotnet gitversion -showvariable semver)
-          echo "version=$SEMVER" >> $GITHUB_ENV 
-        # to be used with ${{ env.version }}
+          echo "version=$SEMVER" >> $GITHUB_ENV
 
       - name: Build the project
         run: dotnet build -c Release --no-restore
