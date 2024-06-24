@@ -54,8 +54,8 @@ jobs:
           if-no-files-found: error
           retention-days: 7
           path: ${{ github.workspace }}/nuget/*.nupkg
-
+      
       - name: Publish NuGet package
         env:
-          NUGET_API_KEY: ${{ secrets.GH_PAT }}
-        run: dotnet nuget push ${{ github.workspace }}/nuget/*.nupkg --api-key "${{ secrets.NUGET_API_KEY  }}" --source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --skip-duplicate
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: dotnet nuget push ${{ github.workspace }}/nuget/*.nupkg -k ${GITHUB_TOKEN} -s https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --skip-duplicate
