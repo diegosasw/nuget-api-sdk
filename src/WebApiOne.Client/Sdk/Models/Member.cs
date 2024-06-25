@@ -20,6 +20,14 @@ namespace WebApiOne.Client.Sdk.Models
 #endif
         /// <summary>The isDeveloper property</summary>
         public bool? IsDeveloper { get; set; }
+        /// <summary>The lastName property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? LastName { get; set; }
+#nullable restore
+#else
+        public string LastName { get; set; }
+#endif
         /// <summary>The name property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -48,6 +56,7 @@ namespace WebApiOne.Client.Sdk.Models
             {
                 { "email", n => { Email = n.GetStringValue(); } },
                 { "isDeveloper", n => { IsDeveloper = n.GetBoolValue(); } },
+                { "lastName", n => { LastName = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
             };
         }
@@ -60,6 +69,7 @@ namespace WebApiOne.Client.Sdk.Models
             _ = writer ?? throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("email", Email);
             writer.WriteBoolValue("isDeveloper", IsDeveloper);
+            writer.WriteStringValue("lastName", LastName);
             writer.WriteStringValue("name", Name);
         }
     }
