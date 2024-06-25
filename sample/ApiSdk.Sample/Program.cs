@@ -6,9 +6,13 @@ using WebApiOne.Client.Options;
 using WebApiOne.Client.Sdk;
 
 var builder = new ConfigurationBuilder();
+
+var environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT") ?? "Development";
+
 builder
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{environment}.json", optional: true, reloadOnChange: true)
     .AddEnvironmentVariables();
 
 var config = builder.Build();
