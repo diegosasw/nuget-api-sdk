@@ -66,5 +66,8 @@ dotnet kiota update -o src/WebApiTwo.Client/Sdk
 
 The preferred approach for SDK automation is to release a new version every time the OpenAPI files change.
 
+GitHub Actions require permissions to create and approve pull requests.
+Go to the repository's settings under Actions > General, and enable `Allow GitHub Actions to create and approve pull requests`
+
 ## Versioning
 It uses dotnet tool `gitversion.tool` locally
