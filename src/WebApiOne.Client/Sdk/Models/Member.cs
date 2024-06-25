@@ -18,6 +18,14 @@ namespace WebApiOne.Client.Sdk.Models
 #else
         public string Email { get; set; }
 #endif
+        /// <summary>The firstName property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? FirstName { get; set; }
+#nullable restore
+#else
+        public string FirstName { get; set; }
+#endif
         /// <summary>The isDeveloper property</summary>
         public bool? IsDeveloper { get; set; }
         /// <summary>The lastName property</summary>
@@ -27,14 +35,6 @@ namespace WebApiOne.Client.Sdk.Models
 #nullable restore
 #else
         public string LastName { get; set; }
-#endif
-        /// <summary>The name property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public string? Name { get; set; }
-#nullable restore
-#else
-        public string Name { get; set; }
 #endif
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
@@ -55,9 +55,9 @@ namespace WebApiOne.Client.Sdk.Models
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "email", n => { Email = n.GetStringValue(); } },
+                { "firstName", n => { FirstName = n.GetStringValue(); } },
                 { "isDeveloper", n => { IsDeveloper = n.GetBoolValue(); } },
                 { "lastName", n => { LastName = n.GetStringValue(); } },
-                { "name", n => { Name = n.GetStringValue(); } },
             };
         }
         /// <summary>
@@ -68,9 +68,9 @@ namespace WebApiOne.Client.Sdk.Models
         {
             _ = writer ?? throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("email", Email);
+            writer.WriteStringValue("firstName", FirstName);
             writer.WriteBoolValue("isDeveloper", IsDeveloper);
             writer.WriteStringValue("lastName", LastName);
-            writer.WriteStringValue("name", Name);
         }
     }
 }
