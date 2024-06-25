@@ -10,6 +10,8 @@ namespace WebApiOne.Client.Sdk.Models
     public class Member : IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>The departmentId property</summary>
+        public Guid? DepartmentId { get; set; }
         /// <summary>The email property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -54,6 +56,7 @@ namespace WebApiOne.Client.Sdk.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "departmentId", n => { DepartmentId = n.GetGuidValue(); } },
                 { "email", n => { Email = n.GetStringValue(); } },
                 { "firstName", n => { FirstName = n.GetStringValue(); } },
                 { "isDeveloper", n => { IsDeveloper = n.GetBoolValue(); } },
@@ -67,6 +70,7 @@ namespace WebApiOne.Client.Sdk.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             _ = writer ?? throw new ArgumentNullException(nameof(writer));
+            writer.WriteGuidValue("departmentId", DepartmentId);
             writer.WriteStringValue("email", Email);
             writer.WriteStringValue("firstName", FirstName);
             writer.WriteBoolValue("isDeveloper", IsDeveloper);
