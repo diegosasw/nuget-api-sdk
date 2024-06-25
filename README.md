@@ -70,4 +70,5 @@ GitHub Actions require permissions to create and approve pull requests.
 Go to the repository's settings under Actions > General, and enable `Allow GitHub Actions to create and approve pull requests`
 
 ## Versioning
-It uses dotnet tool `gitversion.tool` locally
+It uses dotnet tool `gitversion.tool` locally.
+The command `dotnet gitversion -showvariable semver` calculates the semantic version to be used by calculating number of commits and tags.
