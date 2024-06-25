@@ -10,6 +10,14 @@ namespace WebApiOne.Client.Sdk.Models
     public class Project : IParsable
     #pragma warning restore CS1591
     {
+        /// <summary>The displayName property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? DisplayName { get; set; }
+#nullable restore
+#else
+        public string DisplayName { get; set; }
+#endif
         /// <summary>The id property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -56,6 +64,7 @@ namespace WebApiOne.Client.Sdk.Models
         {
             return new Dictionary<string, Action<IParseNode>>
             {
+                { "displayName", n => { DisplayName = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "isStarted", n => { IsStarted = n.GetBoolValue(); } },
                 { "members", n => { Members = n.GetCollectionOfObjectValues<WebApiOne.Client.Sdk.Models.Member>(WebApiOne.Client.Sdk.Models.Member.CreateFromDiscriminatorValue)?.ToList(); } },
@@ -70,6 +79,7 @@ namespace WebApiOne.Client.Sdk.Models
         public virtual void Serialize(ISerializationWriter writer)
         {
             _ = writer ?? throw new ArgumentNullException(nameof(writer));
+            writer.WriteStringValue("displayName", DisplayName);
             writer.WriteStringValue("id", Id);
             writer.WriteCollectionOfObjectValues<WebApiOne.Client.Sdk.Models.Member>("members", Members);
             writer.WriteStringValue("name", Name);
