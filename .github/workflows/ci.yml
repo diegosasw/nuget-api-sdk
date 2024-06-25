@@ -26,30 +26,5 @@ jobs:
       - name: Install local tools
         run: dotnet tool restore
 
-      - name: Run semver
-        run: dotnet gitversion -showvariable semver
-
-      - name: Calculate semantic version
-        id: set_semver
-        run: |
-          SEMVER=$(dotnet gitversion -showvariable semver)
-          echo "version=$SEMVER" >> $GITHUB_ENV
-
       - name: Build the project
         run: dotnet build -c Release --no-restore
-
-      - name: Pack Nuget
-        run: dotnet pack *.sln -c Release -p:Version=${{ env.version }} --output ${{ github.workspace }}/nuget --include-symbols
-
-      - name: Upload NuGet Package Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: nuget
-          if-no-files-found: error
-          retention-days: 7
-          path: ${{ github.workspace }}/nuget/*.nupkg
-      
-      - name: Publish NuGet package
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: dotnet nuget push ${{ github.workspace }}/nuget/*.nupkg -k ${GITHUB_TOKEN} -s https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json --skip-duplicate

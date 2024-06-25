@@ -1,4 +1,4 @@
 mode: Mainline
-branches:
-    feature:
-        tag: preview
+# branches:
+#     feature:
+#         tag: preview
