@@ -19,13 +19,13 @@ app.MapGet("/", async (WebApiOneClient webApiOneClient) =>
             Members = [
                 new Member
                 {
-                    Name = "Joe Bloggs",
+                    FirstName = "Joe Bloggs",
                     Email = "joe@test.com",
                     IsDeveloper = false
                 },
                 new Member
                 {
-                    Name = "Jane Smith",
+                    FirstName = "Jane Smith",
                     Email = "jane@test.com",
                     IsDeveloper = true
                 }
